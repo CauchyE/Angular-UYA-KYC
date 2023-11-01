@@ -1,0 +1,61 @@
+<div class="mx-auto max-w-screen-xl">
+  <div class="text-xl breadcrumbs mb-4">
+    <ul>
+      <li><a routerLink="..">UnUniFi KYC</a></li>
+      <li>KYC Providers</li>
+    </ul>
+  </div>
+
+  <div class="flex flex-col gap-4">
+    <ng-container
+      *ngIf="(providers$ | async) === null; then loading; else loaded"
+    >
+    </ng-container>
+    <ng-template #loading>
+      <p class="text-center">
+        <span class="loading loading-ring loading-lg"></span>
+      </p>
+    </ng-template>
+    <ng-template #loaded>
+      <ng-container
+        *ngIf="!(providers$ | async)?.length; then empty; else filled"
+      ></ng-container>
+      <ng-template #empty>
+        <p class="text-lg text-error">No provider found</p>
+      </ng-template>
+      <ng-template #filled>
+        <div
+          class="card bg-base-200 shadow-xl"
+          *ngFor="let provider of providers$ | async"
+        >
+          <div class="card-body">
+            <h2 class="card-title">{{ provider.name }}</h2>
+            <p>{{ provider.details }}</p>
+            <div class="overflow-x-auto">
+              <table class="table">
+                <tbody>
+                  <tr>
+                    <th>Address</th>
+                    <td>{{ provider.address }}</td>
+                  </tr>
+                  <tr>
+                    <th>Security Contact</th>
+                    <td>{{ provider.security_contact }}</td>
+                  </tr>
+                  <tr>
+                    <th>Website</th>
+                    <td>
+                      <a href="{{ provider.website }}" target="_blank">
+                        {{ provider.website }}
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </ng-template>
+  </div>
+</div>

@@ -1,0 +1,96 @@
+<div class="mx-auto max-w-screen-xl">
+  <div class="text-xl breadcrumbs mb-4">
+    <ul>
+      <li><a routerLink="../..">UnUniFi KYC</a></li>
+      <li>Addresses</li>
+      <li>{{ address$ | async }}</li>
+    </ul>
+  </div>
+
+  <ng-container
+    *ngIf="(verifications$ | async) === null; then loading; else loaded"
+  >
+  </ng-container>
+  <ng-template #loading>
+    <p class="text-center">
+      <span class="loading loading-ring loading-lg"></span>
+    </p>
+  </ng-template>
+  <ng-template #loaded>
+    <ng-container
+      *ngIf="verifications$ | async; then filled; else empty"
+    ></ng-container>
+    <ng-template #empty>
+      <p class="text-lg text-error">No verifications found</p>
+    </ng-template>
+    <ng-template #filled>
+      <div class="card bg-base-200 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title">Verified Providers</h2>
+          <div class="overflow-x-auto">
+            <table class="table">
+              <tbody *ngIf="verifications$ | async as verifications">
+                <tr
+                  *ngFor="let v of verifications"
+                  routerLink="/providers/{{ v.provider_id }}"
+                >
+                  <th></th>
+                  <td>{{ v.provider_id }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </ng-template>
+
+  <ng-container
+    *ngIf="
+      (informationRequests$ | async) === null;
+      then loading;
+      else loadedInfo
+    "
+  >
+  </ng-container>
+  <ng-template #loadedInfo>
+    <ng-container
+      *ngIf="informationRequests$ | async; then filledInfo; else emptyInfo"
+    ></ng-container>
+    <ng-template #emptyInfo>
+      <p class="text-lg text-error">No Information found</p>
+    </ng-template>
+    <ng-template #filledInfo>
+      <div class="card bg-base-200 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title">Verified Providers</h2>
+          <div
+            class="overflow-x-auto"
+            *ngIf="informationRequests$ | async as informationRequests"
+          >
+            <table class="table mb-4" *ngFor="let info of informationRequests">
+              <tbody>
+                <tr>
+                  <th>Provider ID</th>
+                  <td>{{ info.provider_id }}</td>
+                </tr>
+                <tr>
+                  <th>ID</th>
+                  <td>{{ info.id }}</td>
+                </tr>
+                <tr>
+                  <th>E-mail</th>
+                  <td>{{ info.email }}</td>
+                </tr>
+                <tr>
+                  <th>Sender</th>
+                  <td>{{ info.sender }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </ng-template>
+</div>
