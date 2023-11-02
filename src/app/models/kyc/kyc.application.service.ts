@@ -4,6 +4,13 @@ import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate';
 import { ExecuteMsg } from './Kyc.types';
 import { Router } from '@angular/router';
 import { LoadingDialogService } from '../loading-dialog';
+import { FirebaseService } from '../firebase/firebase.service';
+
+export interface VerificationData {
+  contract_address: string;
+  address: string;
+  provider_id: number;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -13,10 +20,11 @@ export class KycApplicationService {
   contractAddress = config.contractAddress;
   constructor(
     private readonly router: Router,
+    private readonly firebase: FirebaseService,
     private readonly loadingDialog: LoadingDialogService
   ) {}
 
-  async createVerification(id: number) {
+  async txVerification(id: number) {
     if (!window.keplr) {
       alert('Please install keplr extension');
       return;
@@ -55,5 +63,24 @@ export class KycApplicationService {
     }
 
     await this.router.navigate(['addresses', address]);
+  }
+
+  async createVerification(id: number) {
+    if (!window.keplr) {
+      alert('Please install keplr extension');
+      return;
+    }
+    await window.keplr.enable(this.chainId);
+    const key = await window.keplr.getKey(this.chainId);
+    const address = key.bech32Address;
+
+    const dialogRef = this.loadingDialog.open('Waiting...');
+    await this.firebase.addVerification({
+      contract_address: this.contractAddress,
+      address: address,
+      provider_id: id,
+    });
+
+    dialogRef.close();
   }
 }

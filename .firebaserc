@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "ununifi-kyc": {
+      "hosting": {
+        "kyc-angular": [
+          "ununifi-kyc"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "ununifi-kyc"
+  }
+}

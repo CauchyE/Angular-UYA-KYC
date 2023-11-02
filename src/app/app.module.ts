@@ -4,6 +4,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoadingDialogModule } from './models/loading-dialog';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import {
+  getAnalytics,
+  provideAnalytics,
+  ScreenTrackingService,
+} from '@angular/fire/analytics';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { getFunctions, provideFunctions } from '@angular/fire/functions';
+import { AngularFireModule } from '@angular/fire/compat';
+import { environment } from 'src/environments/environment';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 @NgModule({
   declarations: [AppComponent],
@@ -12,8 +23,14 @@ import { LoadingDialogModule } from './models/loading-dialog';
     BrowserAnimationsModule,
     AppRoutingModule,
     LoadingDialogModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAnalytics(() => getAnalytics()),
+    provideFirestore(() => getFirestore()),
+    provideFunctions(() => getFunctions()),
   ],
-  providers: [],
+  providers: [ScreenTrackingService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
