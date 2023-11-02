@@ -53,6 +53,20 @@
                 </tbody>
               </table>
             </div>
+            <div class="card-actions justify-end">
+              <button
+                routerLink="{{ provider.id }}"
+                class="btn btn-outline btn-info px-8"
+              >
+                <span>View</span>
+              </button>
+              <button
+                class="btn btn-outline btn-secondary px-8"
+                (click)="register(provider.id)"
+              >
+                <span>Register</span>
+              </button>
+            </div>
           </div>
         </div>
       </ng-template>
