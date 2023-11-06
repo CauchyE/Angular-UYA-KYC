@@ -5,6 +5,7 @@ import {
 } from '@angular/fire/compat/firestore';
 import { VerificationData } from '../kyc/kyc.application.service';
 import { Observable, map } from 'rxjs';
+import { serverTimestamp } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root',
@@ -30,6 +31,10 @@ export class FirebaseService {
 
   async addVerification(data: VerificationData) {
     try {
+      const docRef: any = data;
+      const now = serverTimestamp();
+      docRef.created_at = now as any;
+      docRef.updated_at = now as any;
       await this.verificationCollection.add(data);
     } catch (error) {
       console.error('Firestore error:', error);
