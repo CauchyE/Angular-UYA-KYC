@@ -8,13 +8,18 @@ import { httpsCallable } from 'firebase/functions';
 export class FunctionsService {
   constructor() {}
 
-  async getKycToken(givenName: string, familyName: string, email: string) {
+  async getKycToken(
+    givenName: string,
+    familyName: string,
+    email: string,
+    address: string
+  ) {
     const functions = getFunctions();
     const getKycToken = httpsCallable<
-      { givenName: string; familyName: string; email: string },
+      { givenName: string; familyName: string; email: string; address: string },
       string
     >(functions, 'getkyctoken');
-    const token = await getKycToken({ givenName, familyName, email });
+    const token = await getKycToken({ givenName, familyName, email, address });
     console.log('token:', token);
     return token;
   }

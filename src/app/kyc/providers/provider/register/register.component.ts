@@ -64,7 +64,8 @@ export class RegisterComponent {
     const result = await this.functionsService.getKycToken(
       this.firstName,
       this.lastName,
-      this.email
+      this.email,
+      this.address
     );
     loading.close();
     const token = result.data;
