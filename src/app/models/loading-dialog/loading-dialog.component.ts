@@ -23,13 +23,7 @@ export class LoadingDialogComponent implements OnInit {
     this.message$ = data?.message$ ? data.message$ : of('');
   }
 
-  ngOnInit(): void {
-    this.data?.message$?.subscribe(
-      undefined,
-      () => this.closeDialog(),
-      () => this.closeDialog()
-    );
-  }
+  ngOnInit(): void {}
 
   async closeDialog() {
     this.dialogRef.close();

@@ -4,6 +4,7 @@ import { KycComponent } from './kyc.component';
 import { ProvidersComponent } from './providers/providers.component';
 import { ProviderComponent } from './providers/provider/provider.component';
 import { AddressComponent } from './addresses/address/address.component';
+import { RegisterComponent } from './providers/provider/register/register.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
   {
     path: 'providers/:provider_id',
     component: ProviderComponent,
+  },
+  {
+    path: 'providers/:provider_id/register',
+    component: RegisterComponent,
   },
   {
     path: 'addresses/:address',

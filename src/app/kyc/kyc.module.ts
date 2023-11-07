@@ -6,18 +6,17 @@ import { KycComponent } from './kyc.component';
 import { ProvidersComponent } from './providers/providers.component';
 import { ProviderComponent } from './providers/provider/provider.component';
 import { AddressComponent } from './addresses/address/address.component';
-
+import { FormsModule } from '@angular/forms';
+import { RegisterComponent } from './providers/provider/register/register.component';
 
 @NgModule({
   declarations: [
     KycComponent,
     ProvidersComponent,
     ProviderComponent,
-    AddressComponent
+    AddressComponent,
+    RegisterComponent,
   ],
-  imports: [
-    CommonModule,
-    KycRoutingModule
-  ]
+  imports: [CommonModule, KycRoutingModule, FormsModule],
 })
-export class KycModule { }
+export class KycModule {}

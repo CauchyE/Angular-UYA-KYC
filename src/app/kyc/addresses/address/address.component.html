@@ -24,46 +24,30 @@
       <p class="text-lg text-error">No verifications found</p>
     </ng-template>
     <ng-template #filled>
-      <div class="card bg-base-200 shadow-xl">
+      <div class="card bg-base-200 shadow-xl mb-4">
         <div class="card-body">
           <h2 class="card-title">Verified Providers</h2>
-          <div class="overflow-x-auto">
-            <table class="table">
-              <tbody *ngIf="verifications$ | async as verifications">
-                <tr
-                  *ngFor="let v of verifications"
-                  routerLink="/providers/{{ v.provider_id }}"
-                >
-                  <th></th>
-                  <td>{{ v.provider_id }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </ng-template>
-  </ng-template>
+          <p>
+            The following providers have been verified by this address. You can
+            click on the provider ID to see the details.
+          </p>
 
-  <ng-container
-    *ngIf="
-      (informationRequests$ | async) === null;
-      then loading;
-      else loadedInfo
-    "
-  >
-  </ng-container>
-  <ng-template #loadedInfo>
-    <ng-container
-      *ngIf="informationRequests$ | async; then filledInfo; else emptyInfo"
-    ></ng-container>
-    <ng-template #emptyInfo>
-      <p class="text-lg text-error">No Information found</p>
-    </ng-template>
-    <ng-template #filledInfo>
-      <div class="card bg-base-200 shadow-xl">
-        <div class="card-body">
-          <h2 class="card-title">Verified Providers</h2>
+          <div
+            class="overflow-x-auto"
+            *ngIf="verifications$ | async as verifications"
+          >
+            <P *ngIf="!verifications.length" class="text-lg text-error m-4">
+              No verified provider
+            </P>
+            <button
+              class="btn btn-outline btn-accent w-full my-4"
+              *ngFor="let v of verifications"
+              routerLink="/providers/{{ v.provider_id }}"
+            >
+              #{{ v.provider_id }}
+            </button>
+          </div>
+
           <div
             class="overflow-x-auto"
             *ngIf="informationRequests$ | async as informationRequests"

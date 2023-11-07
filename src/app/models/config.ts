@@ -7,4 +7,14 @@ export const config = {
   contractAddress:
     'ununifi1ds5m6wwuu0cr35kmhxmq3up2w0tamsplnna3wm0dkxnyu5x8k03s3c4luw',
   chainId: 'ununifi-test-v1',
+  chainName: 'UnUniFi Testnet',
+  rest: 'https://a.ununifi-test-v1.cauchye.net:1318',
+  bech32Prefix: {
+    accAddr: 'ununifi',
+    accPub: 'ununifipub',
+    valAddr: 'ununifivaloper',
+    valPub: 'ununifivaloperpub',
+    consAddr: 'ununifivalcons',
+    consPub: 'ununifivalconspub',
+  },
 };

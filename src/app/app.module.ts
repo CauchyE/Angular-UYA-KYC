@@ -15,6 +15,7 @@ import { getFunctions, provideFunctions } from '@angular/fire/functions';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { TxConfirmDialogModule } from './models/txs/tx-confirm/tx-confirm-dialog.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +24,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
     BrowserAnimationsModule,
     AppRoutingModule,
     LoadingDialogModule,
+    TxConfirmDialogModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),

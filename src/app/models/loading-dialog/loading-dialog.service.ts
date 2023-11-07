@@ -1,5 +1,6 @@
 import { LoadingDialogComponent } from './loading-dialog.component';
 import { Dialog } from '@angular/cdk/dialog';
+import { Overlay } from '@angular/cdk/overlay';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
@@ -7,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class LoadingDialogService {
-  constructor(private dialog: Dialog) {}
+  constructor(private overlay: Overlay, private dialog: Dialog) {}
 
   open(message: string) {
     const message$ = new BehaviorSubject<string>(message);

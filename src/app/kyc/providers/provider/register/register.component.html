@@ -1,0 +1,111 @@
+<div class="mx-auto max-w-screen-xl">
+  <div class="text-xl breadcrumbs mb-4">
+    <ul>
+      <li><a routerLink="../../..">UnUniFi KYC</a></li>
+      <li><a routerLink="../..">KYC Providers</a></li>
+      <li>
+        <a routerLink="..">{{ providerId$ | async }}</a>
+      </li>
+      <li>Register</li>
+    </ul>
+  </div>
+
+  <div
+    class="card bg-base-200 shadow-xl"
+    *ngIf="providerId$ | async as providerId"
+  >
+    <div class="card-body">
+      <h2 class="card-title">Register to #{{ providerId }}</h2>
+      <p>
+        Register your identity with this provider. You will be asked to provide
+        your identity document.
+      </p>
+      <form #formRef="ngForm" (submit)="startVerification(providerId)">
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">Enter Name</span>
+          </label>
+          <div class="flex flex-row flex-wrap gap-2 mb-2">
+            <input
+              required
+              type="text"
+              #firstNgModelRef="ngModel"
+              class="input input-bordered w-full sm:w-auto sm:flex-auto"
+              [class]="{
+                'input-error': firstNgModelRef.errors
+              }"
+              [(ngModel)]="firstName"
+              name="firstName"
+            />
+            <input
+              required
+              type="text"
+              #lastNgModelRef="ngModel"
+              class="input input-bordered w-full sm:w-auto sm:flex-auto"
+              [class]="{
+                'input-error': lastNgModelRef.errors
+              }"
+              [(ngModel)]="lastName"
+              name="lastName"
+            />
+          </div>
+        </div>
+
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">Enter Email</span>
+          </label>
+
+          <input
+            required
+            type="email"
+            #emailNgModelRef="ngModel"
+            class="input input-bordered w-full"
+            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+            [class]="{
+              'input-error': emailNgModelRef.errors
+            }"
+            [(ngModel)]="email"
+            name="email"
+          />
+        </div>
+
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">UnUniFi Address</span>
+          </label>
+
+          <div class="flex flex-row flex-wrap gap-2 mb-2">
+            <label
+              class="join-item btn btn-outline btn-primary"
+              (click)="connectWallet()"
+            >
+              <span class="material-symbols-outlined">wallet</span>
+              <span>Connect Wallet</span>
+            </label>
+            <input
+              required
+              readonly
+              type="text"
+              #addressNgModelRef="ngModel"
+              class="input input-bordered w-full sm:w-auto sm:flex-auto"
+              [(ngModel)]="address"
+              name="address"
+            />
+          </div>
+        </div>
+
+        <div class="card-actions justify-end my-4">
+          <button
+            class="btn btn-outline btn-secondary px-8"
+            [disabled]="formRef.invalid"
+          >
+            Start Verification
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- This is where the Web SDK will be mounted -->
+  <div id="complycube-mount"></div>
+</div>

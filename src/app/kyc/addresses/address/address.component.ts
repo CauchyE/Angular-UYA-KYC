@@ -26,6 +26,9 @@ export class AddressComponent {
       from(this.client$),
       this.address$,
     ]).pipe(mergeMap(([client, address]) => client.verifications({ address })));
+    this.verifications$.subscribe((verifications) =>
+      console.log(verifications)
+    );
     this.informationRequests$ = combineLatest([
       from(this.client$),
       this.address$,

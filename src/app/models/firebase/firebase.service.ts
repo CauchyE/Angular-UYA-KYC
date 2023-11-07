@@ -15,9 +15,8 @@ export class FirebaseService {
   verifications$: Observable<VerificationData[]>;
 
   constructor(private afs: AngularFirestore) {
-    this.verificationCollection = this.afs.collection<VerificationData>(
-      'create_verification'
-    );
+    this.verificationCollection =
+      this.afs.collection<VerificationData>('verification');
     this.verifications$ = this.verificationCollection.snapshotChanges().pipe(
       map((v) =>
         v.map((a) => {

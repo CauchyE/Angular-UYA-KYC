@@ -18,6 +18,7 @@ export const getKycToken = onCall<
   });
 
   const token = await complyCube.token.generate(client.id, { referrer: '*://*/*' });
-
-  return token.token;
+  console.log('token', token);
+  // Types are different between Types and actual
+  return token as unknown as string;
 });

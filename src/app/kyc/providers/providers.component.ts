@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
 import { config } from '../../models/config';
 import { KycQueryClient } from '../../models/kyc/Kyc.client';
-import {
-  CosmWasmClient,
-  SigningCosmWasmClient,
-} from '@cosmjs/cosmwasm-stargate';
-import { ExecuteMsg } from 'src/app/models/kyc/Kyc.types';
-import { KycApplicationService } from 'src/app/models/kyc/kyc.application.service';
+import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate';
 
 @Component({
   selector: 'app-providers',
@@ -22,10 +17,4 @@ export class ProvidersComponent {
   );
   params$ = this.client$.then((client) => client.params());
   providers$ = this.client$.then((client) => client.providers());
-
-  constructor(private readonly kycApp: KycApplicationService) {}
-
-  async register(id: number) {
-    await this.kycApp.createVerification(id);
-  }
 }
