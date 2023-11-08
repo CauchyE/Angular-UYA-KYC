@@ -103,12 +103,52 @@
         </div>
 
         <div class="card-actions justify-end my-4">
-          <button
+          <label
+            for="modal-register"
             class="btn btn-outline btn-secondary px-8"
-            [disabled]="formRef.invalid"
           >
             Start Verification
-          </button>
+          </label>
+
+          <input type="checkbox" id="modal-register" class="modal-toggle" />
+          <div class="modal modal-bottom sm:modal-middle">
+            <div class="modal-box">
+              <h3 class="font-bold text-lg">Eligibility</h3>
+              <p class="py-2">
+                You must NOT be located, organized, or a resident in any of the
+                following locations:
+              </p>
+
+              <p class="py-2">
+                United States of America, the People’s Republic of China, the
+                United Kingdom, Panama, Afghanistan, Albania, American Samoa,
+                Angola, Armenia, Azerbaijan, Belarus, Bosnia, region of Balkans,
+                Botswana, Burundi, Bosnia, Burma, Cambodia, Cameroon, Canada,
+                Central African Republic, Chad, China, Côte D’Ivoire, Croatia,
+                Crimea of Ukraine, Cuba, Democratic Republic of Congo,
+                Democratic People’s Republic of Korea, Eritrea, Ethiopia, Ghana,
+                Guam, Guinea, Guinea-Bissau, Haiti, Herzegovina, Iran, Iraq,
+                Kosovo, Japan, Laos, Lebanon, Liberia, Libya, Madagascar, Mali,
+                Macedonia, Mozambique, Myanmar, Nicaragua, Northern Mariana
+                Islands, Pakistan, Moldova, Palestine, Puerto Rico, Russia,
+                Serbia, Somalia, Sri Lanka, Sudan, South Sudan, Syrian Arab
+                Republic, Tajikistan, Trinidad and Tobago, Turkmenistan, Uganda,
+                Venezuela, Virgin Islands (U.S.), Yemen, or Zimbabwe
+              </p>
+
+              <div class="modal-action">
+                <button
+                  class="btn btn-primary px-8"
+                  [disabled]="formRef.invalid"
+                >
+                  Agree
+                </button>
+                <label for="modal-register" class="btn btn-outline btn-error"
+                  >Cancel</label
+                >
+              </div>
+            </div>
+          </div>
         </div>
       </form>
     </div>

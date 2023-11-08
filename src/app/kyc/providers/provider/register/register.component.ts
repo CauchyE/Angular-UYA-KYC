@@ -58,6 +58,10 @@ export class RegisterComponent {
       return;
     }
     const registerAddress = this.address;
+    const checkbox = document.getElementById(
+      'modal-register'
+    ) as HTMLInputElement;
+    checkbox.checked = false;
     const loading = this.loadingDialog.open('Loading...');
     const result = await this.functionsService.getKycToken(
       this.firstName,
@@ -73,10 +77,47 @@ export class RegisterComponent {
       token,
       containerId: 'complycube-mount',
       stages: [
-        'intro',
-        'documentCapture', // address
-        'poaCapture', // identification
-        'completion',
+        {
+          name: 'intro',
+          options: {
+            heading: 'We need to verify your identity',
+            message: [
+              'In order to register with the KYC provider, we need to check a few things. The information entered will be verified and KYC will be revoked if any false information is found.',
+              'This will take only a moment',
+            ],
+            startButtonText: 'Start Verification',
+          },
+        },
+        {
+          name: 'documentCapture',
+          options: {
+            crossDeviceOnly: false,
+            documentTypes: {
+              passport: true,
+              driving_license: true,
+              national_identity_card: true,
+              residence_permit: true,
+            },
+          },
+        },
+        {
+          name: 'poaCapture',
+          options: {
+            documentTypes: {
+              bank_statement: true,
+              utility_bill: true,
+            },
+          },
+        },
+        {
+          name: 'completion',
+          options: {
+            heading: 'Verification submitted',
+            message: [
+              'The next step is to register for a KYC contract on the UnUniFi. Do NOT close the page.',
+            ],
+          },
+        },
       ],
       onComplete: async (data: any) => {
         console.log('Capture complete', data);
