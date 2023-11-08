@@ -12,14 +12,30 @@ export class FunctionsService {
     givenName: string,
     familyName: string,
     email: string,
-    address: string
+    address: string,
+    contractAddress: string,
+    providerId: string
   ) {
     const functions = getFunctions();
     const getKycToken = httpsCallable<
-      { givenName: string; familyName: string; email: string; address: string },
+      {
+        givenName: string;
+        familyName: string;
+        email: string;
+        address: string;
+        contractAddress: string;
+        providerId: string;
+      },
       string
     >(functions, 'getkyctoken');
-    const token = await getKycToken({ givenName, familyName, email, address });
+    const token = await getKycToken({
+      givenName,
+      familyName,
+      email,
+      address,
+      contractAddress,
+      providerId,
+    });
     console.log('token:', token);
     return token;
   }

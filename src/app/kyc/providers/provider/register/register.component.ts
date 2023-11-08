@@ -5,8 +5,7 @@ import { FunctionsService } from 'src/app/models/firebase/functions.service';
 import { KycApplicationService } from 'src/app/models/kyc/kyc.application.service';
 import { Window as KeplrWindow } from '@keplr-wallet/types';
 import { LoadingDialogService } from 'src/app/models/loading-dialog';
-import { Dialog } from '@angular/cdk/dialog';
-import { TxConfirmDialogComponent } from 'src/app/models/txs/tx-confirm/tx-confirm-dialog.component';
+import { config } from 'src/app/models/config';
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -32,7 +31,6 @@ export class RegisterComponent {
     private readonly kycApp: KycApplicationService,
     private readonly functionsService: FunctionsService,
     private readonly router: Router,
-    private readonly dialog: Dialog,
     private readonly loadingDialog: LoadingDialogService
   ) {
     this.providerId$ = this.route.params.pipe(
@@ -65,7 +63,9 @@ export class RegisterComponent {
       this.firstName,
       this.lastName,
       this.email,
-      this.address
+      this.address,
+      config.contractAddress,
+      id
     );
     loading.close();
     const token = result.data;

@@ -20,6 +20,10 @@
         Register your identity with this provider. You will be asked to provide
         your identity document.
       </p>
+      <p>
+        If any deficiencies are found in the identity or other documents, the
+        KYC authorization may be revoked.
+      </p>
       <form #formRef="ngForm" (submit)="startVerification(providerId)">
         <div class="form-control">
           <label class="label">
@@ -30,6 +34,7 @@
               required
               type="text"
               #firstNgModelRef="ngModel"
+              placeholder="First Name"
               class="input input-bordered w-full sm:w-auto sm:flex-auto"
               [class]="{
                 'input-error': firstNgModelRef.errors
@@ -41,6 +46,7 @@
               required
               type="text"
               #lastNgModelRef="ngModel"
+              placeholder="Last Name"
               class="input input-bordered w-full sm:w-auto sm:flex-auto"
               [class]="{
                 'input-error': lastNgModelRef.errors
@@ -60,6 +66,7 @@
             required
             type="email"
             #emailNgModelRef="ngModel"
+            placeholder="example@cauchye.com"
             class="input input-bordered w-full"
             pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
             [class]="{
@@ -87,6 +94,7 @@
               required
               type="text"
               #addressNgModelRef="ngModel"
+              placeholder="ununifi..."
               class="input input-bordered w-full sm:w-auto sm:flex-auto"
               [(ngModel)]="address"
               name="address"

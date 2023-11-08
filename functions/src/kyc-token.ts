@@ -3,7 +3,14 @@ import { complyCubeApiKey } from './config.js';
 import { ComplyCube } from '@complycube/api';
 
 export const getKycToken = onCall<
-  { givenName: string; familyName: string; email: string; address: string },
+  {
+    givenName: string;
+    familyName: string;
+    email: string;
+    address: string;
+    contractAddress: string;
+    providerId: string;
+  },
   Promise<string | null>
 >({ secrets: [complyCubeApiKey] }, async (request) => {
   const complyCube = new ComplyCube({ apiKey: complyCubeApiKey.value() });
@@ -15,7 +22,11 @@ export const getKycToken = onCall<
       firstName: request.data.givenName,
       lastName: request.data.familyName,
     },
-    externalId: request.data.address,
+    metadata: {
+      address: request.data.address,
+      contractAddress: request.data.contractAddress,
+      providerId: request.data.providerId,
+    },
   });
 
   const token = await complyCube.token.generate(client.id, { referrer: '*://*/*' });
